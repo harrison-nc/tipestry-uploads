@@ -3,8 +3,9 @@ autoLaunch = false
 
 [build]
 command = 'npm run build'
-functions = 'functions'
-publish = 'dist'
+functions = 'functions/'
+publish = 'dist/'
 
 [build.environment]
-UPLOAD_DIR = 'uploads'
+STATIC_DIR = 'dist'
+UPLOAD_DIR = 'dist/uploads'

@@ -5,6 +5,10 @@ const uploadDir = require('../middleware/upload-dir');
 const convertToBuffer = require('../util/buffer');
 const createFile = require('../util/file');
 
+const staticDir = process.env.STATIC_DIR;
+
+if (!staticDir) throw new Error('Directory for static resources not provided');
+
 const app = express();
 app.use(logger);
 app.use(express.json());
