@@ -1,0 +1,9 @@
+[dev]
+autoLaunch = false
+
+[build]
+functions = 'functions'
+publish = 'dist'
+
+[build.environment]
+UPLOAD_DIR = 'dist/uploads'
