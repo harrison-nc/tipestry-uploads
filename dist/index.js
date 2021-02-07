@@ -32,6 +32,7 @@ submit.onclick = async (e) => {
 };
 
 const sendForm = async (data) => {
+    console.log('uploading file');
     try {
         const response = await fetch('.netlify/functions/upload', {
             method: "POST",
@@ -40,17 +41,25 @@ const sendForm = async (data) => {
                 "Accept": "application/json"
             },
             body: new URLSearchParams(data).toString()
-        })
+        });
 
-        const result = await response.json();
-
-        if (Number(response.status) !== 200) return console.log('upload failed', result);
-
-        console.log('successfully uploaded file', result);
+        if (response.headers['Content-Type'] === 'application/json')
+            return processJsonResponse(response);
+        else
+            console.info(response.text());
 
     } catch (ex) {
         console.log(ex);
     }
+
+    const processJsonResponse = (response) => {
+        const result = await response.json();
+
+        if (Number(response.status) !== 200)
+            return console.log('upload failed', result);
+        else
+            console.log('successfully uploaded file', result);
+    };
 };
 
 const convertFileToDataURL = (file) => new Promise((resolve, reject) => {
