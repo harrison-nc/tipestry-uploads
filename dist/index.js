@@ -32,7 +32,7 @@ submit.onclick = async (e) => {
 };
 
 const sendForm = async (data) => {
-    console.log('uploading file');
+    console.log('uploading file...');
     try {
         const response = await fetch('.netlify/functions/upload', {
             method: "POST",
@@ -46,7 +46,7 @@ const sendForm = async (data) => {
         if (response.headers['Content-Type'] === 'application/json')
             return processJsonResponse(response);
         else
-            console.info(response.text());
+            console.info(await response.text());
 
     } catch (ex) {
         console.log(ex);
