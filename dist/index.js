@@ -35,7 +35,10 @@ const sendForm = async (data) => {
     try {
         const response = await fetch('.netlify/functions/upload', {
             method: "POST",
-            headers: { 'Content-Type': "application/x-www-form-urlencoded" },
+            headers: {
+                'Content-Type': "application/x-www-form-urlencoded",
+                "Accept": "application/json"
+            },
             body: new URLSearchParams(data).toString()
         })
 
