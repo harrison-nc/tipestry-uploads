@@ -5,3 +5,6 @@ functions/
 # images
 *.jpg
 *.png
+
+# Local Netlify folder
+.netlify
