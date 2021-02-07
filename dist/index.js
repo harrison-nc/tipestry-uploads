@@ -28,7 +28,26 @@ submit.onclick = async (e) => {
     data.append('mimeType', selectedFile.type);
     data.append('size', selectedFile.size);
 
-    console.log(data);
+    await sendForm(data);
+};
+
+const sendForm = async (data) => {
+    try {
+        const response = await fetch('.netlify/functions/upload', {
+            method: "POST",
+            headers: { 'Content-Type': "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(data).toString()
+        })
+
+        const result = await response.json();
+
+        if (Number(response.status) !== 200) return console.log('upload failed', result);
+
+        console.log('successfully uploaded file', result);
+
+    } catch (ex) {
+        console.log(ex);
+    }
 };
 
 const convertFileToDataURL = (file) => new Promise((resolve, reject) => {
