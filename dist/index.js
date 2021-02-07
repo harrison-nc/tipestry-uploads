@@ -52,7 +52,7 @@ const sendForm = async (data) => {
         console.log(ex);
     }
 
-    const processJsonResponse = (response) => {
+    const processJsonResponse = async (response) => {
         const result = await response.json();
 
         if (Number(response.status) !== 200)
